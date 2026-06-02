@@ -259,7 +259,6 @@ MainWindow::MainWindow(bool isIncognito, QWidget *parent)
         };
 
         addProfileField("Engineer", "Rutvik Katariya");
-        addProfileField("Academics", "MCA at Dr. D. Y. Patil School of Science & Tech | BCA at Sutex Bank College");
         addProfileField("Target Roles", "Systems Software Engineer | C++ Developer | Software Architect");
         addProfileField("Core Stack", "C++ / Qt Framework / Java / Python / SQL");
         addProfileField("Specializations", "Systems Programming, Cross-Platform Architecture, Core Backend Systems, Optimization");
