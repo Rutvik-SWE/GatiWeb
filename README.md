@@ -1,49 +1,239 @@
-# GATIWEB Engine 🌐⚡
+# GATIWEB 
 
-**GATIWEB** is a high-performance, native C++ web browser engineered for extreme memory efficiency, zero-latency UI responsiveness, and secure text-based web navigation. 
+A lightweight desktop web browser built with C++ and Qt.
 
-Built entirely on the Qt6 framework, GATIWEB strips away heavy, modern JavaScript execution engines in favor of lightning-fast raw HTML parsing, making it incredibly lightweight, stable, and secure.
+GATIWEB started as a systems programming project to explore browser architecture, networking, caching, memory management, and desktop application development using modern C++.
 
-**Developer:** Rutvik Katariya  
-**Tech Stack:** C++17, Qt 6 (Core, Gui, Widgets, Network), CMake
-
----
-
-## 🧠 Core Architectural Optimizations
-
-* **Memory-Efficient Resource Management:** Aggressive pointer cleanup on tab closures and a hard-capped 50-URL session history per tab prevent RAM bloat during massive, long-term browsing sessions.
-* **O(1) Regex Ad-Block Shield:** Replaced standard array-iteration loops with a statically compiled, natively optimized PCRE2 Regular Expression matching engine to filter tracking domains with near-zero CPU overhead.
-* **Intelligent Network Caching:** Integrated a 150MB local `QNetworkDiskCache` layer that saves static website assets directly to the OS temp directory, drastically reducing latency and network payloads.
-* **CPU-Rescued Meta-Refresh Parsing:** Prevents CPU spiking on massive HTML pages by strictly truncating DOM keyword scans to the first 4,096 bytes (the `<head>` container) when handling automated redirections.
-* **Hardware-Accelerated UI:** Uses `QVariantAnimation` and `QPropertyAnimation` natively handled by the window manager for buttery-smooth sidebar transitions and layout resizing without locking up the main UI thread.
+Instead of focusing on complex web rendering engines, the project focuses on efficient navigation, resource management, tab handling, caching, download management, ad filtering, and a clean desktop experience.
 
 ---
 
-## ✨ Feature Set
+## Features
 
-* **Zero-Latency Native Dashboard:** A hardcoded C++ local start page utilizing a fluid CSS Grid layout, completely bypassing network I/O for instant startup.
-* **Live Theme Synchronization:** A centralized CSS stylesheet runtime pipeline featuring 20 culturally rich Bharatiya accent color profiles (e.g., Kesari, Peacock, Marigold).
-* **Tab Rescue System:** Accidental closure safety protection (`Ctrl+Shift+T`) backed by an optimized 15-item memory stack.
-* **Incognito Isolation:** Dedicated private window allocations with enforced DNT (Do Not Track) tracking header bits.
+* Multi-tab browsing
+* Back / Forward navigation
+* Bookmarks
+* Download manager
+* Private browsing mode
+* Ad and tracker blocking
+* Session restore
+* Multiple themes
+* Cache support
+* Custom homepage dashboard
+* Keyboard shortcuts
 
 ---
 
-## 🛠️ Build & Run Instructions
+## Tech Stack
 
-This project uses CMake. Ensure you have a C++17 compatible compiler (GCC/Clang/MSVC) and Qt6 installed on your system.
+* C++17
+* Qt 6
+* Qt Widgets
+* Qt Network
+* PCRE2
+* CMake
+
+---
+
+## Why I Built This
+
+I built GATIWEB to gain hands-on experience with:
+
+* Modern C++
+* Desktop application architecture
+* Networking
+* Memory management
+* Cache systems
+* UI development with Qt
+* Software design and project organization
+
+The goal was not to compete with modern browsers, but to understand how browser components work together and to build a complete desktop application from scratch.
+
+---
+
+## Project Structure
+
+```text
+GatiWeb/
+├── src/
+│   ├── main.cpp
+│   ├── ui/
+│   ├── network/
+│   ├── cache/
+│   ├── themes/
+│   └── browser/
+├── resources/
+├── CMakeLists.txt
+└── README.md
+```
+
+---
+
+## Build Requirements
+
+* C++17 Compiler
+* Qt 6
+* CMake 3.20+
+* PCRE2
+
+---
+
+## Build Instructions
 
 ```bash
-# 1. Clone the workspace files
-git clone [https://github.com/Rutvik-SWE/GatiWeb.git](https://github.com/Rutvik-SWE/GatiWeb.git)
+git clone https://github.com/Rutvik-SWE/GatiWeb.git
+
 cd GatiWeb
 
-# 2. Setup a separate build folder
-mkdir build && cd build
+mkdir build
+cd build
 
-# 3. Generate Makefiles and Build with Link-Time Optimization (LTO)
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
+
 cmake --build . --config Release
+```
 
-# 4. Run the engine binary
-./GatiWeb    # Linux / macOS
-GatiWeb.exe  # Windows MinGW/MSVC
+### Run
+
+```bash
+# Linux
+./GatiWeb
+
+# Windows
+GatiWeb.exe
+```
+
+---
+
+## Testing Guide
+
+### Dashboard Test
+
+* Press `Ctrl + T` multiple times.
+* Open the Home page repeatedly.
+
+Expected:
+
+* Dashboard loads correctly.
+* UI remains responsive.
+
+---
+
+### Ad Blocking Test
+
+Try:
+
+```text
+https://doubleclick.net
+https://ads.yahoo.com
+```
+
+Expected:
+
+* Navigation is blocked.
+* Warning page appears.
+
+---
+
+### Cache Test
+
+Open:
+
+```text
+https://en.wikipedia.org/wiki/C%2B%2B
+```
+
+Then:
+
+1. Open another Wikipedia page.
+2. Press Back.
+
+Expected:
+
+* Previously visited content restores quickly.
+* Navigation remains smooth.
+
+---
+
+### Navigation History Test
+
+Open:
+
+```text
+https://text.npr.org
+```
+
+Navigate through many pages and verify:
+
+* Back/Forward navigation works correctly.
+* History management behaves as expected.
+
+---
+
+### Session Restore Test
+
+1. Open several tabs.
+2. Close one tab.
+3. Press `Ctrl + Shift + T`.
+
+Expected:
+
+* Recently closed tab is restored.
+
+---
+
+### Private Browsing Test
+
+1. Open a private window.
+2. Browse several pages.
+3. Close the window.
+
+Expected:
+
+* Session data remains isolated.
+
+---
+
+### Download Test
+
+```text
+https://speed.hetzner.de/100MB.bin
+```
+
+Expected:
+
+* Download starts successfully.
+* Progress updates correctly.
+* File completes without interruption.
+
+---
+
+## Sample URLs for Testing
+
+```text
+https://example.com
+https://www.wikipedia.org
+https://www.qt.io
+https://news.ycombinator.com
+https://text.npr.org
+https://www.gnu.org
+```
+
+---
+
+## Future Improvements
+
+* Better cache management
+* Enhanced download controls
+* Additional theme options
+* Improved content filtering
+* Performance profiling tools
+* Expanded keyboard shortcuts
+
+---
+
+## Developer
+
+Rutvik Katariya
+
+MCA Student • C++ Developer • Qt Developer • Systems Software Enthusiast
