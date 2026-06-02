@@ -34,7 +34,6 @@ This project uses CMake. Ensure you have a C++17 compatible compiler (GCC/Clang/
 
 ```bash
 # 1. Clone the workspace files
-# 1. Clone the workspace files
 git clone [https://github.com/Rutvik-SWE/GatiWeb.git](https://github.com/Rutvik-SWE/GatiWeb.git)
 cd GatiWeb
 
